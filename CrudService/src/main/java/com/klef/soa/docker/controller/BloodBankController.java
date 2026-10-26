@@ -1,16 +1,19 @@
-package com.klef.soa.exam.controller;
+package com.klef.soa.docker.controller;
 
 import java.util.List;
+import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.klef.soa.exam.entity.BloodBank;
-import com.klef.soa.exam.service.BloodBankService;
+import com.klef.soa.docker.dto.BloodBankRequestDTO;
+import com.klef.soa.docker.entity.BloodBank;
+import com.klef.soa.docker.service.BloodBankService;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class BloodBankController {
 
     @Autowired
@@ -22,8 +25,8 @@ public class BloodBankController {
     }
 
     @PostMapping("/Add")
-    public ResponseEntity<BloodBank> add(@RequestBody BloodBank bloodBank) {
-        BloodBank saved = service.add(bloodBank);
+    public ResponseEntity<BloodBank> add(@Valid @RequestBody BloodBankRequestDTO dto) {
+        BloodBank saved = service.add(dto);
         return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 
