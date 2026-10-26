@@ -17,7 +17,7 @@ services:
   backend:
     image: ${DOCKER_USERNAME}/docker-backend-2400030437:latest
     build:
-      context: ./CrudService
+      context: ./backend
       dockerfile: Dockerfile
     container_name: backend_app
     restart: always
